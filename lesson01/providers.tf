@@ -8,6 +8,7 @@ terraform {
         }
     }
 
+    # HCP Terraform Cloud configuration
     cloud {
         organization = "pizhang"
 
@@ -19,4 +20,13 @@ terraform {
 
 provider "aws" {
     region = var.region
+
+    default_tags {
+        tags = {
+            Environment = var.environment
+            Project     = var.project
+            Owner       = var.owner
+            Terraform   = "true"
+        }
+    }
 }
