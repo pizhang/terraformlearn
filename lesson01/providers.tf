@@ -7,6 +7,14 @@ terraform {
             version = "6.53.0"
         }
     }
+
+    cloud {
+        organization = "pizhang"
+
+        workspaces {
+            name = "associate004"
+        }
+    }    
 }
 
 provider "aws" {
