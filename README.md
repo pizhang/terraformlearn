@@ -7,9 +7,12 @@
 
 2. Create a branch for each lesson
 ```
+git branch <new branch name>
+git switch <branch name>
 ```
 3. Delete the branch once the lesson is finished
 ```
+git branch -d <branch name>
 ```
 
 
