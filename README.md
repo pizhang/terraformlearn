@@ -5,6 +5,13 @@
 
 1. Create folders for each lesson, each serving a main learning objective
 
+2. Create a branch for each lesson
+```
+```
+3. Delete the branch once the lesson is finished
+```
+```
+
 
 
 ## Lessons
