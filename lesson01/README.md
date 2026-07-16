@@ -14,6 +14,8 @@ Run the following command to login to HCP Terraform:
 terraform login
 ```
 
+You will be forwarded to HCP Terraform and you can generate a token. Copy the token and paste as prompted. The token will be saved in .terraform.d/credentials.tfrc.json.
+
 ## AWS Logon
 
 We have used HCP Terraform workspace "Quick setup AWS dynamic credentials" to create the following IAM role. And added inline permissions manaully.
