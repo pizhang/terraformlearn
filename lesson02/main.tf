@@ -1,9 +1,9 @@
 resource "aws_ssm_parameter" "test_param" {
-  name  = "/gibhub/workflow/test"
+  name  = "/associate004/github"
   type  = "String"
   value = "bar"
 
   tags = {
-    Name = "/github/workflow/test"
+    Name = "/associate004/github"
   }
 }
