@@ -1,5 +1,8 @@
 locals {
-  github_subjects = [for branch in var.allowed_branches : "repo:${var.github_owner}/${var.github_repo}:ref:refs/heads/${branch}"]
+  github_subjects = concat(
+    [for branch in var.allowed_branches : "repo:${var.github_owner}/${var.github_repo}:ref:refs/heads/${branch}"],
+    var.allow_tags ? ["repo:${var.github_owner}/${var.github_repo}:ref:refs/tags/*"] : []
+  )
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
@@ -33,16 +36,19 @@ resource "aws_iam_role" "github_actions" {
   })
 }
 
+# Create a scoped IAM policy. By default this policy is intentionally minimal (sts:GetCallerIdentity).
+# Update `var.allowed_actions` and `var.allowed_resources` to grant the exact permissions your CI needs.
 resource "aws_iam_policy" "github_actions_policy" {
+  count       = var.create_policy ? 1 : 0
   name        = "${var.role_name}-policy"
-  description = "Permissions for GitHub Actions to deploy Terraform-managed AWS resources"
+  description = "Permissions for GitHub Actions to operate in AWS (scoped via variables)"
   policy      = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
-        Action   = "*"
-        Resource = "*"
+        Action   = var.allowed_actions
+        Resource = var.allowed_resources
       }
     ]
   })
@@ -50,5 +56,5 @@ resource "aws_iam_policy" "github_actions_policy" {
 
 resource "aws_iam_role_policy_attachment" "github_actions_attach" {
   role       = aws_iam_role.github_actions.name
-  policy_arn = aws_iam_policy.github_actions_policy.arn
+  policy_arn = var.create_policy ? aws_iam_policy.github_actions_policy[0].arn : var.attached_policy_arn
 }
