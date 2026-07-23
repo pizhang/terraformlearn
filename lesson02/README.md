@@ -1,4 +1,14 @@
-# Lesson 1: Terraform 101
+# Use GitHub Workflow to deploy Infrastructure
+
+Use GitHub workflow to deploy infrastructure to AWS account.
+
+
+## Learning target
+
+1. Create GibHub Workflow
+2. Deploy from master or branch
+3. Deploy to multiple environments (sandbox, dev)
+
 
 ## Providers
 
@@ -32,7 +42,9 @@ Value: arn:aws:iam::509399591785:role/terraform-pzawslearn
 Key: TFC_AWS_WORKLOAD_IDENTITY_AUDIENCE
 Value: aws.workload.identity	
 
-	
+### AWS Permissions
+1. Secret manager
+2. SSM Paramter Store: /associate004/*
 
 ## Usage
 
@@ -42,6 +54,3 @@ terraform plan
 terraform apply
 terraform destroy
 ```
-
-
-
