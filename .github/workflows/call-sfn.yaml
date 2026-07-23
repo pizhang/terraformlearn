@@ -1,5 +1,5 @@
 name: start AWS Step Functions execution
-run-name: Start AWS Step Functions execution in ${{ inputs.environment }} | ${{ inputs.branch }}
+run-name: Start AWS Step Functions execution in ${{ inputs.environment }} | ${{ github.ref_name }} 
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
@@ -7,14 +7,6 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: Git branch to deploy
-        required: true
-        default: main
-        type: choice
-        options:
-          - main
-          - lesson02
       environment:
         description: Target environment to deploy
         required: true
