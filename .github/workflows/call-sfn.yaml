@@ -1,17 +1,12 @@
 name: start AWS Step Functions execution
-run-name: Start AWS Step Functions execution in ${{ inputs.environment }} | ${{ inputs.branch }}
+run-name: Start AWS Step Functions execution in ${{ inputs.environment }} | ${{ github.ref_name }} 
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: Git branch to deploy
-        required: true
-        default: main
-        type: choice
-        options:
-          - main
-          - lesson02
       environment:
         description: Target environment to deploy
         required: true
@@ -27,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ inputs.branch }}
 
-      - uses: aws-actions/configure-aws-credentials@v3
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
