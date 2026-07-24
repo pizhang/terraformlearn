@@ -8,6 +8,7 @@ variable "github_owner" {
   description = "GitHub owner or organization for the repository"
 }
 
+# GitHub repository allowed in the GitHub CICD IAM Role
 variable "github_repo" {
   type        = string
   description = "GitHub repository name"
@@ -15,7 +16,7 @@ variable "github_repo" {
 
 variable "role_name" {
   type    = string
-  default = "github-actions-iam-role"
+  default = "github-actions-cicd-iam-role"
 }
 
 variable "allowed_branches" {

@@ -1,6 +1,7 @@
 # Create AWS GitHub Web Identity and IAM role for GitHub Workflow
 
-This module creates AWS IAM resources to allow GitHub Actions to authenticate with AWS using OpenID Connect (OIDC).
+This module creates AWS IAM identity provider and IAM roles with a scoped trust policy. This enables GitHub Actions workflow to authenticate with AWS using OpenID Connect (OIDC).
+
 
 ## Resources created
 
@@ -9,19 +10,6 @@ This module creates AWS IAM resources to allow GitHub Actions to authenticate wi
 - `aws_iam_policy`
 - `aws_iam_role_policy_attachment`
 
-## Usage
-
-```hcl
-module "github_cicd" {
-  source = "./iam-cicd"
-
-  region          = "ap-southeast-2"
-  github_owner    = "<GITHUB_OWNER>"
-  github_repo     = "<GITHUB_REPO>"
-  role_name       = "github-actions-iam-role"
-  allowed_branches = ["main", "lesson02"]
-}
-```
 
 ### AWS login methods
 
